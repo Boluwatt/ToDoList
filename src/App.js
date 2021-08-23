@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+// import ToDoItem from "./components/ToDoItem";
+
+import "./App.css";
 
 function App() {
+  const [timeImage, setTimeImage] = useState("evening");
+  const [timeOfDay, setTimeOfDay] = useState("evening");
+
+  const styles = {};
+
+  useEffect(() => {
+    const date = new Date();
+    const hours = date.getHours();
+    // let timeOfDay;
+
+    if (hours < 12) {
+      setTimeOfDay("Morning");
+      setTimeImage("morning");
+    } else if (hours >= 12 && hours < 17) {
+      setTimeOfDay("Afternoon");
+      setTimeImage("afternoon");
+    } else if (hours >= 17 && hours < 21) {
+      setTimeOfDay("Evening");
+      setTimeImage("evening");
+    } else {
+      setTimeOfDay("Night");
+      setTimeImage("night");
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`${timeImage} landingDiv`}>
+      <h1 style={styles}>Good {timeOfDay}</h1>
+      <br />
+      <button className="landingButton" href="">
+        Create To Do List
+      </button>
     </div>
   );
 }
