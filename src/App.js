@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const date = new Date();
     const hours = date.getHours();
-    // let timeOfDay;
+    // let timeOfDay = "";
 
     if (hours < 12) {
       setTimeOfDay("Morning");
